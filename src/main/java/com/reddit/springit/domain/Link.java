@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Data
-public class Link {
+public class Link extends Auditable {
 
     @Id //Marks a primary key
     @GeneratedValue //Auto incremental value
