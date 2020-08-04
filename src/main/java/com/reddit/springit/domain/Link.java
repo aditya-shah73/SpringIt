@@ -1,11 +1,16 @@
 package com.reddit.springit.domain;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -15,7 +20,13 @@ public class Link {
     @Id //Marks a primary key
     @GeneratedValue //Auto incremental value
     private Long id;
+    @NonNull
     private String title;
+    @NotNull
     private String url;
+
+    //comments
+    @OneToMany(mappedBy = "link")
+    private List<Comment> comments = new ArrayList<>();
 
 }
