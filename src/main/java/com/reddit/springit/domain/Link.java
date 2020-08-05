@@ -1,9 +1,6 @@
 package com.reddit.springit.domain;
 
-import com.sun.istack.NotNull;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
-@Data
+@Getter @Setter
+@ToString
 public class Link extends Auditable {
 
     @Id //Marks a primary key
@@ -22,11 +19,27 @@ public class Link extends Auditable {
     private Long id;
     @NonNull
     private String title;
-    @NotNull
+    @NonNull
     private String url;
 
     //comments
     @OneToMany(mappedBy = "link")
     private List<Comment> comments = new ArrayList<>();
 
+    public Link(String title, String url) {
+        this.title = title;
+        this.url = url;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Link() {
+
+    }
+
+    public void addComment(Comment comment){
+        comments.add(comment);
+    }
 }
